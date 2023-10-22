@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C1E46472AD41D2B00A6F58D /* QueryAndFiltering.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = QueryAndFiltering.md; sourceTree = "<group>"; };
 		6C9B1EB12ACAAE31004CC894 /* learn swiftdata.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "learn swiftdata.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C9B1EB42ACAAE31004CC894 /* learn_swiftdataApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = learn_swiftdataApp.swift; sourceTree = "<group>"; };
 		6C9B1EB62ACAAE31004CC894 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 				6C9B1EC42ACAB06B004CC894 /* Container&Context.md */,
 				6C9B1EC52ACAB3A6004CC894 /* Basic Database.md */,
 				6C9B1ECF2ACAD452004CC894 /* References.md */,
+				6C1E46472AD41D2B00A6F58D /* QueryAndFiltering.md */,
 			);
 			path = Markdown;
 			sourceTree = "<group>";

@@ -10,9 +10,11 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) var context
-    @State private var isShowBottomSheet: Bool = false
+    
     // MARK: - SwiftData Fetch
     @Query(sort: \User.birth) var users: [User]
+    
+    @State private var isShowBottomSheet: Bool = false
     
     @State private var userToEdit: User?
     

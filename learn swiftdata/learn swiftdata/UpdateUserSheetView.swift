@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UpdateUserSheetView: View {
     // 모든 SwiftUI View는 environment를 통해서 ModelContext에 접근할 수 있음
-    @Environment(\.modelContext) var context
+//    @Environment(\.modelContext) var context
     // MARK: - SwiftData Update
     @Bindable var user: User
     @Environment(\.dismiss) var dismiss
