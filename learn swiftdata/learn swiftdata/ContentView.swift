@@ -14,6 +14,27 @@ struct ContentView: View {
     // MARK: - SwiftData Fetch
     @Query(sort: \User.birth) var users: [User]
     
+    /// Predicate && SortDescriptor 예시 1
+    @Query(filter: #Predicate<User> { $0.age > 20 },
+           sort: [SortDescriptor(\User.birth)])
+    var sortedUser: [User]
+    
+    /// Predicate && SortDescriptor 예시 2
+    @Query private var queriedUser: [User]
+    var queriedUserComputedProperty: [User] {
+        let startDate = Date(timeIntervalSinceReferenceDate: -123456789.0)
+        let endDate = Date()
+
+        return queriedUser.filter({ $0.birth > startDate && $0.birth < endDate })
+    }
+    
+    /// Predicate && SortDescriptor 예시 3
+    @Query(filter: #Predicate<User> { $0.company != nil }) var query3: [User]
+    
+    
+    
+    
+    
     @State private var isShowBottomSheet: Bool = false
     
     @State private var userToEdit: User?
