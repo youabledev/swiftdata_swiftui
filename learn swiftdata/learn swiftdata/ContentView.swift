@@ -12,7 +12,7 @@ struct ContentView: View {
     @Environment(\.modelContext) var context
     
     // MARK: - SwiftData Fetch
-    @Query(sort: \User.birth) var users: [User]
+//    @Query(sort: \User.birth) var users: [User]
     
     /// Predicate && SortDescriptor 예시 1
     @Query(filter: #Predicate<User> { $0.age > 20 },
@@ -24,7 +24,7 @@ struct ContentView: View {
     var queriedUserComputedProperty: [User] {
         let startDate = Date(timeIntervalSinceReferenceDate: -123456789.0)
         let endDate = Date()
-
+        
         return queriedUser.filter({ $0.birth > startDate && $0.birth < endDate })
     }
     
@@ -37,47 +37,22 @@ struct ContentView: View {
         user.interests.contains { $0.title == "등산" } == true
     }) var query4: [User]
     
-    
-    
     @State private var isShowBottomSheet: Bool = false
-    
     @State private var userToEdit: User?
+    @State private var searchString: String = ""
     
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             NavigationStack {
-                List {
-                    ForEach(users) { user in
-                        HStack {
-                            Text(user.name)
-                            Text("\(user.age)")
-                            Text("\(user.birth.formatted())")
-                        }
-                        .onTapGesture {
-                            userToEdit = user
-                        }
+                UserListView(searchString: searchString, userToEdit: $userToEdit)
+                    .searchable(text: $searchString)
+                    .sheet(item: $userToEdit) { user in
+                        UpdateUserSheetView(user: user)
                     }
-                    .onDelete{ indexSet in
-                        print("인덱스 : ", indexSet)
-                        for index in indexSet {
-                            // TODO: predicate 쓰는 방법 알아보기
-                            // MARK: - SwiftData Delete
-                            context.delete(users[index])
-                        }
-                    }
-                }
-                .sheet(item: $userToEdit) { user in
-                    UpdateUserSheetView(user: user)
-                }
             }
             .sheet(isPresented: $isShowBottomSheet, content: {
                 AddUserSheetView()
             })
-            .overlay {
-                if users.isEmpty {
-                    Text("사용자를 추가해 주세요")
-                }
-            }
             
             Button {
                 isShowBottomSheet.toggle()

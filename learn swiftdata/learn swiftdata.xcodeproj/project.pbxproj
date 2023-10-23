@@ -77,8 +77,8 @@
 		6C9B1EB32ACAAE31004CC894 /* learn swiftdata */ = {
 			isa = PBXGroup;
 			children = (
-				6C73F87D2AE5594B00A1B0D7 /* Model */,
 				6C9B1EC62ACAB434004CC894 /* Markdown */,
+				6C73F87D2AE5594B00A1B0D7 /* Model */,
 				6C9B1EB42ACAAE31004CC894 /* learn_swiftdataApp.swift */,
 				6C9B1EB62ACAAE31004CC894 /* ContentView.swift */,
 				6C9B1ECB2ACAC643004CC894 /* AddUserSheetView.swift */,
