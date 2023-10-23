@@ -18,15 +18,16 @@ struct learn_swiftdataApp: App {
 //        return container
 //    }()
     
+
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
 //        .modelContainer(container)
         // injecting container
-        .modelContainer(for: User.self)
+//        .modelContainer(for: User.self)
 //        .modelContainer(for: [User.self, Interest.self, Recipt.self])
-        
+        .modelContainer(testContainer)
         
         
         // 여러개인 경우 .modelContainer(for: [Model1.self, Model2.self .. ]) 로 나타낼 수 있음
@@ -34,4 +35,23 @@ struct learn_swiftdataApp: App {
     }
 }
 
+@MainActor
+let testContainer: ModelContainer = {
+    let schema = Schema([User.self])
+    let container = try! ModelContainer(for: schema, configurations: [])
+//    let company = Company(name: "test company")
+//    container.mainContext.insert(company)
+//    for user in mockUsers {
+//        container.mainContext.insert(user)
+//    }
+    return container
+}()
 
+let mockUsers: [User] = [
+    User(name: "정다현", age: 23, birth: Date(), closeUser: []),
+    User(name: "전영빈", age: 23, birth: Date(), closeUser: []),
+    User(name: "안주환", age: 24, birth: Date(), closeUser: []),
+    User(name: "문창기", age: 36, birth: Date(), closeUser: []),
+    User(name: "백예원", age: 57, birth: Date(), closeUser: []),
+    User(name: "백지우", age: 14, birth: Date(), closeUser: []),
+]
