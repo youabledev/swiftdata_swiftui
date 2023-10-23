@@ -31,7 +31,11 @@ struct ContentView: View {
     /// Predicate && SortDescriptor 예시 3
     @Query(filter: #Predicate<User> { $0.company != nil }) var query3: [User]
     
-    
+    /// Predicate && SortDescriptor 예시 4
+    @Query(filter: #Predicate<User> { user in
+        user.name.contains("kim") &&
+        user.interests.contains { $0.title == "등산" } == true
+    }) var query4: [User]
     
     
     

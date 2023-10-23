@@ -15,6 +15,7 @@ import SwiftData
     /// 회사명
     var name: String
     /// 해당 회사에 소속된 유저 목록
+    @Relationship(deleteRule: .cascade, inverse: \User.company)
     var user: [User] = []
 
     init(name: String) {
