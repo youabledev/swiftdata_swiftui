@@ -18,6 +18,8 @@ import SwiftData
     /// 해당 회사가 삭제되면 회사에 소속된 사용자 목록이 함께 삭제된다.
     @Relationship(deleteRule: .cascade, inverse: \User.company)
     var user: [User] = []
+    /// 회사 목록에서 선택된 회사를 표시하기 위해 사용
+    @Transient var isChecked = false
 
     init(name: String) {
         self.name = name

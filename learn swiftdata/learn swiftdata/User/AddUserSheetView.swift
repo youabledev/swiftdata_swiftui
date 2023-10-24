@@ -13,7 +13,7 @@ struct AddUserSheetView: View {
     @Environment(\.modelContext) var context
     @Environment(\.dismiss) var dismiss
     
-    @Query var companyList: [Company]
+    @Query var allCompany: [Company]
     
     @State private var userNmae: String = ""
     @State private var userAge: String = ""
@@ -46,12 +46,31 @@ struct AddUserSheetView: View {
                 section(title: "나이", content: TextField("나이를 입력해 주세요.", text: $userAge).keyboardType(.numberPad))
                 section(title: "생일", content: DatePicker("생일을 선택해 주세요.", selection: $birth, displayedComponents: .date))
                 
-                Picker("company", selection: $selectedCompany) {
-                    ForEach(companyList, id: \.self) { company in
-                        Text(company.name)
-                          .tag(company)
-                      }
+                Text("소속 회사 선택")
+                ScrollView {
+                    if allCompany.isEmpty {
+                        Text("선택할 수 있는 회사 목록이 없습니다.")
+                            .foregroundStyle(.gray)
+                    }
+                    
+                    ForEach(allCompany, id: \.self) { company in
+                        HStack {
+                            Text(company.name)
+                                .fontWeight(company == selectedCompany ? .heavy : .light)
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            selectedCompany = company
+                        }
+                    }
                 }
+                .frame(maxWidth: .infinity)
+                .frame(height: 100)
+                .background(.white)
+                .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(lineWidth: 2)
+                )
                 
                 Spacer()
             } //: VStack
