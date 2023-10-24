@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct UpdateUserSheetView: View {
     // 모든 SwiftUI View는 environment를 통해서 ModelContext에 접근할 수 있음
@@ -13,6 +14,9 @@ struct UpdateUserSheetView: View {
     // MARK: - SwiftData Update
     @Bindable var user: User
     @Environment(\.dismiss) var dismiss
+    @Query var companyList: [Company]
+    
+    @State private var selectedCompany: Company?
     
     var body: some View {
         VStack(spacing: 10) {
@@ -33,6 +37,16 @@ struct UpdateUserSheetView: View {
             section(title: "나이", content: TextField("나이를 입력해 주세요.", value: $user.age, formatter: NumberFormatter()).keyboardType(.numberPad))
             section(title: "생일", content: DatePicker("생일을 선택해 주세요.", selection: $user.birth, displayedComponents: .date))
             
+            HStack {
+                Text("소속: ")
+                Text(user.company?.name ?? "없음")
+                Picker("\(user.company?.name ?? "없음")", selection: $selectedCompany) {
+                    ForEach(companyList, id: \.self) { company in
+                        Text(company.name)
+                          .tag(company)
+                      }
+                }
+            }
             
             Spacer()
         } //: VStack

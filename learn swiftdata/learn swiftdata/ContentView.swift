@@ -49,22 +49,46 @@ struct ContentView: View {
                     .sheet(item: $userToEdit) { user in
                         UpdateUserSheetView(user: user)
                     }
+                
+                HStack {
+                    Spacer()
+                    NavigationLink {
+                        CompanyView()
+                    } label: {
+                        manageCompanyButtonLabel
+                    }
+
+                    addUserButton
+                }
             }
             .sheet(isPresented: $isShowBottomSheet, content: {
                 AddUserSheetView()
             })
             
-            Button {
-                isShowBottomSheet.toggle()
-            } label: {
-                Image(systemName: "plus")
-                    .foregroundStyle(.white)
-                    .frame(width: 40, height: 40)
-                    .background(.black)
-                    .clipShape(Circle())
-            }
-            .padding(.trailing, 20)
+
         }
+    }
+    
+    var addUserButton: some View {
+        Button {
+            isShowBottomSheet.toggle()
+        } label: {
+            Image(systemName: "plus")
+                .foregroundStyle(.white)
+                .frame(width: 40, height: 40)
+                .background(.black)
+                .clipShape(Circle())
+        }
+        .padding(.trailing, 20)
+    }
+    
+    var manageCompanyButtonLabel: some View {
+        Text("회사 관리하기")
+            .foregroundStyle(.white)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
+            .background(.black)
+            .padding(.bottom, 1)
     }
 }
 
