@@ -24,11 +24,24 @@ struct CompanyView: View {
                 }
             }
             .padding(.horizontal, 30)
-            List(companyList) { company in
-                HStack {
-                    Text(company.name)
-                }
-            }
+            List {
+                ForEach(companyList, id: \.self) { company in
+                    NavigationLink {
+                        CompanyDetailView(company: company)
+                    } label: {
+                        HStack {
+                            Text(company.name)
+                        }
+                    }
+                } //: ForEach
+                .onDelete(perform: removeList(at:))
+            } //: List
+        }
+    }
+    
+    func removeList(at offsets: IndexSet) {
+        for index in offsets {
+            context.delete(companyList[index])
         }
     }
 }

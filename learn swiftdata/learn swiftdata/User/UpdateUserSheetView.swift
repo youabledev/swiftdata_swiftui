@@ -15,7 +15,6 @@ struct UpdateUserSheetView: View {
     @Bindable var user: User
     @Environment(\.dismiss) var dismiss
     @Query var companyList: [Company]
-    
     @State private var selectedCompany: Company?
     
     var body: some View {
@@ -37,16 +36,32 @@ struct UpdateUserSheetView: View {
             section(title: "나이", content: TextField("나이를 입력해 주세요.", value: $user.age, formatter: NumberFormatter()).keyboardType(.numberPad))
             section(title: "생일", content: DatePicker("생일을 선택해 주세요.", selection: $user.birth, displayedComponents: .date))
             
-            HStack {
-                Text("소속: ")
-                Text(user.company?.name ?? "없음")
-                Picker("\(user.company?.name ?? "없음")", selection: $selectedCompany) {
-                    ForEach(companyList, id: \.self) { company in
+            Text("소속 회사")
+            ScrollView {
+                Text("none")
+                    .fontWeight(user.company == nil ? .heavy : .light)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        user.company = nil
+                    }
+                ForEach(companyList, id: \.self) { company in
+                    HStack {
                         Text(company.name)
-                          .tag(company)
-                      }
+                            .fontWeight(company == user.company ? .heavy : .light)
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        user.company = company
+                    }
                 }
             }
+            .frame(maxWidth: .infinity)
+            .frame(height: 100)
+            .background(.white)
+            .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(lineWidth: 2)
+            )
             
             Spacer()
         } //: VStack

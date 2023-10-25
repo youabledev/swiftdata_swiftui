@@ -21,6 +21,7 @@ import SwiftData // SwiftData를 사용하기 위해 import 해줌
     /// 유저의 관심사. 여러개 선택 가능
     var interests: [Interest] = []
     /// 소속된 회사
+//    @Relationship(deleteRule: .cascade) // 회사를 지워도 그대로 남아 있음
     var company: Company? = nil
     
     init(name: String, age: Int, birth: Date, closeUser: [User]) {
