@@ -21,15 +21,15 @@ struct learn_swiftdataApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            LibraryView()
+            ContentView()
+//            LibraryView()
         }
 //        .modelContainer(container)
         // injecting container
 //        .modelContainer(for: User.self)
 //        .modelContainer(for: [User.self, Interest.self, Recipt.self])
-//        .modelContainer(testContainer)
-        .modelContainer(libraryContainer)
+        .modelContainer(testContainer)
+//        .modelContainer(libraryContainer)
         
         
         // 여러개인 경우 .modelContainer(for: [Model1.self, Model2.self .. ]) 로 나타낼 수 있음
@@ -41,8 +41,8 @@ struct learn_swiftdataApp: App {
 let libraryContainer: ModelContainer = {
     let schema = Schema([Book.self])
     let container = try! ModelContainer(for: schema, configurations: [])
-//    let library = Library(name: "apple library")
-//    container.mainContext.insert(library)
+    let library = Library(name: "NY library")
+    container.mainContext.insert(library)
     return container
 }()
 
